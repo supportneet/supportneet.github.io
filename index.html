@@ -1,0 +1,504 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Arguments in favour of NEET</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="images/favicon.ico" />
+    
+    <style>
+      
+      html, body { padding: 0; margin: 0; }
+      body {
+        margin-bottom: 8em;
+        background: #c29b81 url('images/bg.jpg') no-repeat;
+        background-position: 25% 20%;
+        background-size: 175%;
+        background-attachment: fixed;
+      }
+      
+      body, button, input, textarea, select, option {
+        font: 16px/24px Georgia, serif;
+        color: #665244;
+      }
+      
+      h1, h2, h3, p, ul.help, .response-text { margin: 0; padding: 1em; line-height: 1.25em; position: relative; background: rgba(255,255,255,0.75); } 
+      ul.help li {margin-left: 1.5em;}
+      a { color: #665244; text-decoration: none; }
+      
+      input, textarea, select {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        padding: 1em;
+        line-height: 1em;
+      }
+      
+      label { display: block; padding: 1em 0; }
+      
+      button { 
+        background: #cca388; color: white;
+        border: none; padding: 1em; margin: 0;
+        line-height: 1em; border-radius: 4px;
+      }
+      button:hover { background: #665244; }
+      
+      textarea {
+        resize: vertical;
+      }
+      
+      .response-text { height: 20em; font-size: 0.75em; }
+      
+      .container {
+        display: block;
+        max-width: 55em; padding: 0 3em; margin: 0 auto;
+      }
+
+      .container.logo {text-align: center; min-height: 150px; padding: 1em}
+      .container.logo img {width: 40%;}
+      
+/*--- Step 1: User info --- */
+
+            
+/*--- Step 2: Select answers (optional) ---- */
+      
+      .section { position: relative; box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5); cursor: pointer; border-radius: 4px; }
+      .section:hover { box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5); }
+      
+      .question { font-weight: bold; margin-top: 2em; }
+      .answer { font-style: italic; }
+      .heading { font-weight: bold; }
+      
+      .question { border-bottom: 1px solid #ccc; }
+
+      .hidden { display: none; }
+      .argument, .heading { display: none; }
+      .question, .answer {
+        overflow: hidden; white-space: pre; text-overflow: ellipsis;
+        cursor: pointer;
+      }
+      
+      .expanded .argument, .expanded .heading { display: block; }
+      .expanded .question, .expanded .answer { white-space: normal; }
+      
+      
+      .argument { color: #999; cursor: pointer; }
+      .argument.selected { color: #000; position: relative; }
+      .argument:hover { background: #eee; }
+      .argument.selected::before {
+        content: "✓"; position: absolute; top: 0.25em; left: -0.5em;
+        font-size: 64px; color: #665244;
+      }
+      
+      .heading { color: #999; }
+      .count {
+        font-size: 0.75em;
+        position: absolute; top: -1em; right: -1em;
+        background: rgba(0,0,0,0.5); color: #fff; padding: 1em; line-height: 1em; border-radius: 1.5em;
+      }
+      
+/*      The action bar */
+      
+      .actions {
+        background: #665244; color: #fff;
+        position: fixed; height: auto; padding: 0.5em 0; bottom: 0; left: 0; right: 0;
+        box-shadow: 0 4px 16px 0 rgba(0,0,0,0.5);
+      }
+      
+      .actions .container { text-align: right; }
+      .actions button.left { float: left; }
+      .actions button { padding: 1.5em; color: #fff; background: #cca388; margin: 0.1em 0.25em; }
+      @media (max-width: 768px) {
+        .actions button { padding: 0.5em; }
+      }
+      .actions button.primary { color: #cca388; background: #fff; font-weight: bold; }
+      .actions button:hover { box-shadow: 0 0 8px 0 #fff; }
+      
+/*      Step selector */
+      
+      .step { display: none; }
+      .step h1, ul.help {margin-bottom: 1em}
+      .step1 { display: block; }
+      
+    </style>
+    
+    <!-- /build -->
+  </head>
+  <body>
+    <div class="container logo"></div>
+    <div class="container step step1">
+      <h1>Email TN NEET Committee!</h1>
+
+      <p>பொதுமக்கள் தங்கள் கருத்துக்களை வரும் 23-ம் தேதிக்குள் அஞ்சல் வழியாகவோ, neetimpact2021@gmail.com என்ற மின்னஞ்சல் வழியாகவோ அனுப்பலாம்!
+- ஓய்வுபெற்ற நீதியரசர் ஏ.கே.ராஜன் குழு அறிவிப்பு</p>
+      
+      <p>This information helps us customize your email.</p>
+      
+      <label>Your name<input type="text" id="usernameInput" /></label>
+      <label>You are a<select type="text" id="usercatInput">
+        <option value="student">Student</option>
+        <option value="startup">Parent</option>
+        <option value="startup">Professional</option>
+        <option value="startup">Educationalist</option>
+        <option value="startup">Activist</option>
+      </select></label>
+      
+      <div class="actions">
+        <div class="container">
+          <button class="choose-answers">Choose answers</button>
+          <button class="send-response primary">Send response</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container step step2">
+      <h1>Choose your answers</h1>
+      <ul class="help">
+        <li>Each section below respresents a part of your email.</li>
+        <li>Click a section to choose your answer for that section.</li>
+        <li>In each section, there are various options that form a part of the answer for that question.</li>
+        <li>Some answer options have been pre-selected for you.</li>
+        <li>You may wish to read them in detail to understand what you are choosing.</li>
+        <li>Click each answer option to include or exclude it. Ticked options will be included in your answers.</li>
+      </ul>
+      <div id="content">
+<!-- start of raw email -->
+
+
+<div class="hidden">To<br>Justice A.K. Rajan<br>Directorate of Medical ducation<br/>
+ 3rd Floor, Kilpauk, Chennai-600010</div>
+
+<div class="hidden">Dated: June <span class="date"></span>, 2021</div>
+
+<div class="hidden">Dear Sir,</div>
+
+<div class="hidden">Re: Response to the Notification dated on July 17 2021</div>
+
+<div class="section">
+<p class="skip">Introductory comments</p>
+<p class="hidden">We wish to thank you for providing us the opportunity to submit our views on the NEET Examination in TamilNadu.</p>
+<p class="argument">
+  <p> I hereby write to inform you that NEET is a very much needed examination for Tamilnadu, so that every deserving, downtrodden, backward district and economically weaker section students can get a shot at their aim of becoming a Doctor to serve our country. </p>
+  <p> NEET was re-introduced by Supreme Court of India as they have carefully analyzed the trends where the medical seats were sold for higher prices which made the seats available only for the rich people and the dreams of deserving candidates irrespective of caste, creed and economy was being crushed.</p>
+  <p> Private medical colleges were making a killing for medical seats before NEET and we are all aware that even though a student who comes from poor background had qualifying marks, he could not procure or sponsor his medical education as the rates were skyrocketing.  </p>
+  <p> With NEET in Place, Seats blocking could be reduced, economically weaker people might get admission in private colleges too under a unifying exam, instead of the previous 85% seats based on 12th scores which puts state boarders and CBSE syllabus students at two different levels. With NEET both the State board and CBSE Board students are evaluated at the same level. So with NEET, when everything is based on a NEET score, you can not only compete for the 100% of seats, difficulty level is uniform for everyone and the rankings are fair. With 100% competence in state quota, students can also compete in 15% of all India quota for seats in other states as well.<br> NEET can be attempted 3 times but a low score in board exam diminishes all chances if admission is based on 12th marks only. The old method killed many aspiring doctor’s dream.</p>
+  <p> The questions are application based which urges the students to think instead of mugging up and re-producing the same and so people who are actually eligible to become doctors would get the seat instead of someone who just is good at rote learning.</p>
+  <p> TN curriculum really needs an improvement in its learning styles and syllabus, so making a high standard entrance exam mandatory will only bring elevation in the teaching standards in the long run to the point that TN students no longer need to be dependent on money sucking coaching centers to crack competitive exams. This is what Exactly NEP 2020 does. So TN should support and follow NEP 2020 too. </p>
+  <p> Cost is also one major drawback so for a bright student with great rankings who cannot even afford the 50-60 lakhs fees of an MBBS admission, this entrance exam is a boon<br> NEET does not affect reservations. There is currently 69% reservation for medical seats in Tamil Nadu, which remains unchanged under admission by NEET scores as well. Also AIPMT exams were more comprehensive and difficult to complete within the exam duration. But NEET pattern was more relaxed giving students ample time to think and it reduces anxiety towards preparation.</p>
+  <p> So, Finally I wish to say that any plans to abolish NEET is against the Reservations, against the social justice and against the policy of education for all, against the rational idea of bring equality, justice, education and a balance in economy for our country.</p>
+  <p> So, I support NEET strongly for Tamilnadu as it is the only way to get more quality doctors and also to improve healthcare for rural based poor folks. NEET is a need for Tamilnadu.</p><p> Regards,</p>
+
+</p>
+
+<p class="argument">We request that a transparent process with respect to this consultation may be followed to inspire greater confidence and trust. You are requested to publicly publish our response on the your website.</p>
+<p class="hidden">Thanking you,</p>
+<p class="hidden username">A Citizen</p>
+</div>
+
+<div class="section">
+<p class="question">Point1: Equal Standard</p>
+<p class="answer">As there are various Education system, Common Entrance will ensure the equal standard for evaluation and oppurtunity to all.</p>  
+<p class="heading">Example 1</p>
+<p class="argument">Not even 2 percent of Tamil Nadu government school kids study medicine <a href="http://www.newindianexpress.com/states/tamil-nadu/2017/feb/18/not-even-2-percent-of-tamil-nadu-government-school-kids-study-medicine-1571885.html">Reference NewIndianExpress</a></p>
+<p class="heading">Example 2</p>
+<p class="argument">Corporation Worker son got Admission through NEET <a href="https://www.vikatan.com/news/medicine/130478-a-corporation-workers-son-got-medical-seat-in-government-college">Reference Vikatan</a></p>
+</div>
+
+<div class="section">
+<p class="question">Point 2: Donation.</p>
+<p class="answer">This will scrap the donation machineries.</p>
+<p class="heading">Example1</p>
+<p class="argument">SRM seat scam <a href="https://timesofindia.indiatimes.com/city/chennai/srm-seat-scam-madras-high-court-allows-refund-to-affected-students/articleshow/60399296.cms">Reference: Timesnow</a></p>
+
+<p class="heading">Example 2</p>
+<p class="argument">Black Money Quota <a href="https://timesofindia.indiatimes.com/india/black-money-quota-25000-mbbs-pg-seats-at-rs-12000-crore/articleshow/50779616.cms">Reference: Timesnow</a></p>
+<p class="heading">Example 3</p>
+<p class="argument">College wants MBBS students to pay Rs 15L per year <a href="https://timesofindia.indiatimes.com/city/chennai/college-wants-mbbs-students-to-pay-rs-15l-per-year-moves-court/articleshow/47134917.cms">Reference: Times of India</a></p>
+</div>
+
+<div class="section">
+<p class="question">Point 3:Poor Quality of Education</p>
+<p class="answer">Existing Education system needs to be improved for better education. so Entrance Exam will help you ensure knowledge level</p>
+<p class="heading">Example 1</p>
+  <p class="argument">Very less Number of students are qualified for National level Institution <a href="http://www.deccanchronicle.com/nation/in-other-news/030816/of-8-lakh-from-tamil-nadu-board-only-13-enter-iit-m.html">Reference: Deccanchronicle</a></p>
+<p class="heading">Example 2</p>
+<p class="argument">To be filled</p>
+</div>
+
+<div class="section">
+<p class="question">Point 4: Education Year.</p>
+<p class="answer">NEET Allow students to pursue Medical degree even after completion Year. so students who missed the oppurtunity can compete in later years.</p>
+<p class="heading">Example 1</p>
+  <p class="argument">2019 Student cracked NEET on 2020 <a href="https://www.newindianexpress.com/states/tamil-nadu/2020/oct/16/tirupur-boy-r-srijan-secures-eighthrank-in-neet-2020-2211225.html">Reference: New Indian Express</a></p>
+<p class="heading">Example 2</p>
+<p class="argument">To be filled</p>
+</div>
+
+
+
+        
+<!-- end of raw email -->
+      </div>
+      
+      <div class="actions">
+        <div class="container">
+          <button class="start-over left">◀</button>
+          <button class="send-response primary">Send response</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container step step3">
+      <h1>Ctrl+C to Copy</h1>
+      <p>To: neetimpact2021@gmail.com</p>
+      <textarea class="response-text" readonly></textarea>
+      <div class="actions">
+        <div class="container">
+          <button class="start-over left">◀</button>
+          <button class="copy-complete primary">Done, copied</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container step step4">
+      <h1>Open email and paste (Ctrl+V)</h1>
+      <p>To: neetimpact2021@gmail.com<br /></p>
+      <textarea class="response-text" readonly></textarea>
+      <p>You will be able to edit the email before sending. The following recipients
+        will be automatically filled:</p>
+      <div class="actions">
+        <div class="container">
+          <button class="start-over left">◀</button>
+          <button class="open-email primary gmail">Gmail</button>
+          <button class="open-email primary yahoo">Yahoo</button>
+          <button class="open-email primary other-email">Other</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container step step5">
+      <h1>Help spread the word!</h1>
+      <p>To: neetimpact2021@gmail.com</p>
+      <textarea class="response-text" readonly></textarea>
+
+      <p>Sending our views to NEET committee. Unless there’s public awareness about Education, they still ignore our voices.</p>
+      
+      <div class="actions">
+        <div class="container">
+          <button class="start-over left">◀</button>
+          <button class="share-facebook primary">Share on Facebook</button>
+          <button class="share-twitter primary">Tweet out</button>
+        </div>
+      </div>
+      
+    </div>
+    
+    
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      var supports = {
+        mailto: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent), // use mailto on mobile
+        breakEncode: !(/(iPad|iPhone|iPod)/g.test(navigator.userAgent)), // line breaks are not encoded by encodeURIComponent on iOS
+        commandKey: false  // true for Macs
+      };
+      
+      function pickOne(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      var body, subject, toAddress = "neetimpact2021@gmail.com",
+          bccAddress = "";
+      
+      $(function () {
+        selectRandomArguments($("#content"));
+
+        $(".start-over").click(function () {
+          switchToStep(1);
+        });
+        
+        $(".choose-answers").click(function () {
+          switchToStep(2);
+        });
+        
+        $(".send-response").click(function () {
+          var encodedBody;
+          
+          body = generateBody($("#content"));
+          subject = generateSubject();
+          
+          $(".response-text").val(body);
+          
+          if(supports.mailTo) {
+            encodedBody = encodeURIComponent(body);
+            if(!supports.breakEncode) encodedBody = encodedBody.replace("\n","%0A");
+            window.location.href = "mailto:"+toAddress+"?subject="+encodeURIComponent(subject)+"&bcc="+bccAddress+"&body="+encodedBody;
+            switchToStep(5);
+          } else {
+            switchToStep(3);
+            $(".step3 .response-text").focus();
+          }
+        });
+        
+        $(".step3 .response-text").bind("copy", function () {
+          switchToStep(4);
+        })
+        
+        $(".copy-complete").click(function () {
+          switchToStep(4);
+        });
+        
+        $(".open-email").click(function () {
+          console.log(subject);
+          if ($(this).hasClass("gmail")) window.open("https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to="+toAddress+"&bcc="+bccAddress+"&su="+encodeURIComponent(subject));
+          if ($(this).hasClass("yahoo")) window.open("http://compose.mail.yahoo.com/?Subject="+encodeURIComponent(subject)+"&To="+toAddress+"&Bcc="+bccAddress);
+          if ($(this).hasClass("other-email")) location.href = "mailto:"+toAddress+"?subject="+encodeURIComponent(subject)+"&bcc="+bccAddress;
+          switchToStep(5);
+        });
+        
+        $(".section").click(function () {
+          if(!$(this).hasClass('expanded')) {
+            $(".section.expanded").removeClass("expanded");
+            $(this).addClass("expanded");
+            this.scrollIntoView();
+          }
+        });
+        $(".section > p:nth-child(1)").click(function (e) {
+          if($(this).parent().hasClass("expanded")) {
+            $(this).parent().removeClass("expanded");
+            e.stopPropagation();
+          }
+        });
+        
+        $(".argument").click(function (e) {
+          $(this).toggleClass("selected");
+          updateCount($(this).closest(".section"));
+          e.stopPropagation();
+        });
+        
+        $(".response-text").focus(function () {
+          this.select();
+        });
+        
+        $("#usernameInput").change(function () {
+          $(".username").html($(this).val());
+        });
+        
+        $(".share-facebook").click(function () {
+          window.open("https://www.facebook.com/sharer/sharer.php?u=supportneet.github.io");
+        });
+        
+        $(".share-twitter").click(function () {
+          window.open("https://twitter.com/home?status=Send%20your%20views%20to%20TN%20NEET%20committee%20to%20protect%20Medical%20Education%20in%20Tamilnadu%20-%20supportneet.github.io");
+        });
+        
+        $(".username").html($("#usernameInput").val());
+        $(".date").html((new Date().getDate()));
+        
+      });
+      
+      function switchToStep(n) {
+        $(".step").hide();
+        $(".step" + n).show();
+      }
+      
+      function selectRandomArguments($el) {
+        $el.children().each(function (i, p) {
+          var $p = $(p);
+          if ($p.hasClass("argument")) {
+            if (Math.random() < 0.35) $p.addClass("selected");
+          } else if($p.hasClass("section")) {
+            selectRandomArguments($p);
+            updateCount($p);
+          }
+        });
+      }
+      
+      function updateCount($el) {
+        var sel=0, tot=0;
+        $el.find(".count").remove();
+        
+        $el.children().each(function (i, p) {
+          var $p = $(p);
+          if ($p.hasClass("argument")) {
+            if($p.hasClass("selected")) sel++;
+            tot++;
+          }
+        });
+        
+        if(tot) $el.append($("<div>").addClass("skip count").html(sel + "/" + tot));
+      }
+      
+      function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex ;
+
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        return array;
+      }
+      
+      function generateBody($el) {
+        var head = "", args = [], text = "";
+        
+        function getText($p) {
+          return $p.html().
+            replace(/\s+/g, " ").
+            replace(/<a[^>]*href="([^"]*)"[^>]*>.*?<\/a>/g, " $1 ").
+            split(/<br[^>]*>/).map(function (line) {
+              return line.trim();
+            }).join("\n").replace(/<[^>]+>/g, " ").trim();
+        }
+        
+        $el.children().each(function (i, p) {
+          var $p = $(p), val;
+          
+          if ($p.hasClass("argument")) {
+            if($p.hasClass("selected")) {
+              args.push(getText($p));
+            }
+          } else {
+            if(args.length && head) {
+              text += head + "\n\n";
+              head = "";
+            }
+            
+            if(args.length) {
+              text += shuffle(args).join("\n\n") + "\n\n";
+              args = [];
+            }
+            
+            if ($p.hasClass("section")) {
+              text += generateBody($p) + '\n\n';
+            } else if ($p.hasClass("heading")) {
+              head = getText($p);
+            } else if (!$p.hasClass("skip")) {
+              text += getText($p) + '\n\n';
+            }
+          }
+        });
+        
+        return text;
+      }
+      
+      function generateSubject () {
+        return pickOne([
+          pickOne(["Re:", "Regarding the", "On the", "About the", "Sub:", "Response:"])+" "+
+          pickOne(["Paper", "paper", "Consultation Paper", "proposal", "publication"])+" "+
+          pickOne(["about", "on", "regarding"])+" "+
+          pickOne(["regulation of NEET", "Medical Entrance"]),
+          
+          pickOne(["Support " + pickOne(["Entrance", "NEET"]) + " for "]) +
+          pickOne(["Study of Medicine ", "Medical Education ", "Medical College "])
+        ]);
+      }
+    </script>
+  </body>
+</html>
